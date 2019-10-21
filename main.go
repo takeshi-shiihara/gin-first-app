@@ -12,6 +12,17 @@ import (
 var db *gorm.DB
 
 func main() {
+	user := web.New()
+	gogi.Handle("/user/*", user)
+
+	user.Use(middleware.SubRouter)
+	user.Get("/index", UserIndex)
+	user.Get("/new", UserNew)
+	user.Post("/new", UserCreate)
+	user.Get("/edit/:id", UserEdit)
+	user.Post("/update/:id", UserUpdate)
+	user.Get("/delete/:id", UserDelete)
+
 	gogi.Server()
 }
 
