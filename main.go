@@ -16,6 +16,7 @@ func main() {
 	gogi.Handle("/user/*", user)
 
 	user.Use(middleware.SubRouter)
+	user.Use(SuperSecure)
 	user.Get("/index", UserIndex)
 	user.Get("/new", UserNew)
 	user.Post("/new", UserCreate)
